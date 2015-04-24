@@ -1,0 +1,1 @@
+value.partition("150")[2].partition("marcxml:datafield")[0].replace("\"","").replace("=","$").replace("</marcxml:subfield>","").replace(/ind[12]\$.+/,"").replace("<marcxml:subfield code","").replace(">","").replace(/\s<\//,"")
