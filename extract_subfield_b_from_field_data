@@ -1,0 +1,1 @@
+forEach(value.split("$$"), n, (if(startsWith(n, "b"),n,""))).join("")
