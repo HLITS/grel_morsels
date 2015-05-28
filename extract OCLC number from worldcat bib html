@@ -1,0 +1,1 @@
+value.split('http://www.worldcat.org/oclc/')[1].split('.')[0]
