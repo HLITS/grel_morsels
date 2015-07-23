@@ -1,0 +1,1 @@
+value.trim().replace(/; \([0-9]+\)/, "").replace("[", "").replace("] ", "$a").replace("]", "")
