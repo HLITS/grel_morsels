@@ -1,0 +1,1 @@
+forEach(value.split("<madsrdf:PersonalName>"), v, v.partition('<madsrdf:authoritativeLabel xml:lang="en">')[2].partition("<\/madsrdf:authoritativeLabel>")[0])[0]
