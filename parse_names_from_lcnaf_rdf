@@ -1,1 +1,7 @@
+#get authorized form of name
+
 forEach(value.split("<madsrdf:PersonalName>"), v, v.partition('<madsrdf:authoritativeLabel xml:lang="en">')[2].partition("<\/madsrdf:authoritativeLabel>")[0])[0]
+
+#get full name without dates
+
+forEach(value.split('<madsrdf:PersonalName>'), v, v.partition ('<madsrdf:FullNameElement> <madsrdf:elementValue xml:lang="en">')[2].partition('<\/madsrdf:elementValue>')[0])[0].chomp(',')
