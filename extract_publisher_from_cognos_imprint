@@ -1,1 +1,1 @@
-value.split(": ")[1].replace(/(,)?(\s)?(\[)?(c)?\d{4}(\])?(.+)?/, " ").replace("[", "").replace("]", "").replace("'", "")
+value.split(": ")[1].replace(/(,)?(\s)?(\[)?([c©])?\d{4}(\])?(.+)?/, " ").replace("[", "").replace("]", "").replace("'", "")
