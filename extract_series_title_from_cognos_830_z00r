@@ -1,0 +1,1 @@
+trim(value.replace(/\${2}a/, "").replace(/(\;)?\${2}.+/, "").replace('"','').replace("[", "").replace("]", ""))
