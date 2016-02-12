@@ -1,1 +1,1 @@
-if( endsWith( if( endsWith( value, "u" ), "xxu", value ), "c" ), "xxc", value )
+if( endsWith( value, "c" ), "xxc", if( endsWith( value, "u" ), "xxu", value ) )
