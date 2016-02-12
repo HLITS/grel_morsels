@@ -1,0 +1,1 @@
+if( endsWith( if( endsWith( value, "u" ), "xxu", value ), "c" ), "xxc", value )
