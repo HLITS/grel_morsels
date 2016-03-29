@@ -3,6 +3,21 @@
 join(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\n')[0]), ', ')
 
 
+#get list of non-Harvard library symbols
+#to do: add more Harvard symbols
+
+join(
+forEach(
+value.parseHtml().select('value'), v,
+if(
+contains( 
+v.substring(10, 16).split('\n')[0], 'HLS'
+), '', v.substring(10, 16).split('\n')[0])
+), ', '
+)
+
+
+
 #get length of holding library list (assumes no duplicates)
 #to do: check for duplicates
 
