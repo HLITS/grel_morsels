@@ -1,1 +1,1 @@
-:if(startsWith(value, "$$aocn"), value.split('$$aocn')[0], "")
+if(startsWith(value, "$$aocn"), value.split('$$aocn')[0], "")
