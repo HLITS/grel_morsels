@@ -1,0 +1,9 @@
+#get list of holding library symbols
+
+forEach(value.parseHtml().select('value'), v, v.substring(10, 13))
+
+
+#get length of holding library list (assumes no duplicates)
+#to do: check for duplicates
+
+value.parseHtml().select('value').length()
