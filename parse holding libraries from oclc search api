@@ -1,6 +1,6 @@
 #get list of holding library symbols
 
-forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\n')[0])
+join(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\n')[0]), ', ')
 
 
 #get length of holding library list (assumes no duplicates)
