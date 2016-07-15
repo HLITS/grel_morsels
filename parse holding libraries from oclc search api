@@ -6,7 +6,7 @@ join(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\n
 #get list of non-Harvard library symbols
 #assumes that no non-Harvard symbols will be substrings of Harvard symbols
 
-join((filter(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\n')[0]), h, indexOf("BHA BOH CLS FLL HBS HCH HFL HHG HLS HLSFA HMG HMM HMR HMS HMU HMY HMZ HRA HTV HUL HVL HVLIT KSG MAHCO MCS MHUAM SIH SIJ SIK SLR SQD SYS TOZ YNH DDO DICFA", h) < 0)), ',')
+join((filter(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\n')[0]), h, indexOf("BHA BOH CLS FLL HBS HCH HFL HHG HLS HLSFA HMG HMM HMR HMS HMU HMY HMZ HRA HTV HUL HVL HVLIT KSG MAHCO MCS MHUAM SIH SIJ SIK SLR SQD SYS TOZ YNH DDO DICFA", h) < 0)), ', ')
 
 
 #get length of holding library list (assumes no duplicates)
