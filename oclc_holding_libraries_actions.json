@@ -1,0 +1,91 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Create column oclc no at index 4 based on column 035 0_ using expression grel:if(startsWith(value, \"$$aocn\"), value.split('$$aocn')[0], \"\")",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "oclc no",
+    "columnInsertIndex": 4,
+    "baseColumnName": "035 0_",
+    "expression": "grel:if(startsWith(value, \"$$aocn\"), value.split('$$aocn')[0], \"\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column oclc search api url at index 5 based on column oclc no using expression grel:if(length(value) > 0, \"http://www.worldcat.org/webservices/catalog/content/libraries/\" + value + \"?maximumLibraries=200&wskey=MAlNmqU6yXNkMV8DXHJU6oJRkbnHfDKVdSZWenGWmD9Jl4aabJMwhMFddgwU4TS7mp3l1r1EeaMb61E5\",\"\")",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "oclc search api url",
+    "columnInsertIndex": 5,
+    "baseColumnName": "oclc no",
+    "expression": "grel:if(length(value) > 0, \"http://www.worldcat.org/webservices/catalog/content/libraries/\" + value + \"?maximumLibraries=200&wskey=MAlNmqU6yXNkMV8DXHJU6oJRkbnHfDKVdSZWenGWmD9Jl4aabJMwhMFddgwU4TS7mp3l1r1EeaMb61E5\",\"\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "description": "Create column oclc search api xml at index 6 by fetching URLs based on column oclc search api url using expression grel:value",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "oclc search api xml",
+    "columnInsertIndex": 6,
+    "baseColumnName": "oclc search api url",
+    "urlExpression": "grel:value",
+    "onError": "set-to-blank",
+    "delay": 4000
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column holding library symbols at index 7 based on column oclc search api xml using expression grel:join(\nforEach(\nvalue.parseHtml().select('value'), v,\nif(\ncontains( \nv.substring(10, 16).split('\\n')[0], 'HLS'\n), '', v.substring(10, 16).split('\\n')[0])\n), ', ')",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "holding library symbols",
+    "columnInsertIndex": 7,
+    "baseColumnName": "oclc search api xml",
+    "expression": "grel:join(\nforEach(\nvalue.parseHtml().select('value'), v,\nif(\ncontains( \nv.substring(10, 16).split('\\n')[0], 'HLS'\n), '', v.substring(10, 16).split('\\n')[0])\n), ', ')",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column non-harvard holding library symbols at index 7 based on column oclc search api xml using expression grel:join((filter(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\\n')[0]), h, indexOf(\"BHA BOH CLS FLL HBS HCH HFL HHG HLS HLSFA HMG HMM HMR HMS HMU HMY HMZ HRA HTV HUL HVL HVLIT KSG MAHCO MCS MHUAM SIH SIJ SIK SLR SQD SYS TOZ YNH DDO DICFA\", h) < 0)), ',')",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "non-harvard holding library symbols",
+    "columnInsertIndex": 7,
+    "baseColumnName": "oclc search api xml",
+    "expression": "grel:join((filter(forEach(value.parseHtml().select('value'), v, v.substring(10, 16).split('\\n')[0]), h, indexOf(\"BHA BOH CLS FLL HBS HCH HFL HHG HLS HLSFA HMG HMM HMR HMS HMU HMY HMZ HRA HTV HUL HVL HVLIT KSG MAHCO MCS MHUAM SIH SIJ SIK SLR SQD SYS TOZ YNH DDO DICFA\", h) < 0)), ',')",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column oclc search api url",
+    "columnName": "oclc search api url"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column oclc search api xml",
+    "columnName": "oclc search api xml"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column count of non-harvard holding library symbols at index 6 based on column non-harvard holding library symbols using expression grel:length(value.split(\" \"))",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "count of non-harvard holding library symbols",
+    "columnInsertIndex": 6,
+    "baseColumnName": "non-harvard holding library symbols",
+    "expression": "grel:length(value.split(\" \"))",
+    "onError": "set-to-blank"
+  }
+]
