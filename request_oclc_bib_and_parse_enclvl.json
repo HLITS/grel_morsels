@@ -1,0 +1,55 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Create column oclc no at index 3 based on column 035 0_ using expression grel:if(startsWith(value, \"$$aocn\"), value.split('$$aocn')[0], \"\")",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "oclc no",
+    "columnInsertIndex": 3,
+    "baseColumnName": "035 0_",
+    "expression": "grel:if(startsWith(value, \"$$aocn\"), value.split('$$aocn')[0], \"\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column oclc bibliographic url at index 4 based on column oclc no using expression grel:'http://www.worldcat.org/webservices/catalog/content/' + value + '?wskey=MAlNmqU6yXNkMV8DXHJU6oJRkbnHfDKVdSZWenGWmD9Jl4aabJMwhMFddgwU4TS7mp3l1r1EeaMb61E5'",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "oclc bibliographic url",
+    "columnInsertIndex": 4,
+    "baseColumnName": "oclc no",
+    "expression": "grel:'http://www.worldcat.org/webservices/catalog/content/' + value + '?wskey=[your_wskey]'",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "description": "Create column oclc bibligraphic xml at index 5 by fetching URLs based on column oclc bibliographic url using expression grel:value",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "oclc bibligraphic xml",
+    "columnInsertIndex": 5,
+    "baseColumnName": "oclc bibliographic url",
+    "urlExpression": "grel:value",
+    "onError": "store-error",
+    "delay": 5000
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column enc lvl from OCLC record at index 5 based on column oclc bibligraphic xml using expression grel:trim(value.parseHtml().select('leader')[0].substring(9,35)).substring(17, 18)",
+    "engineConfig": {
+      "mode": "record-based",
+      "facets": []
+    },
+    "newColumnName": "enc lvl from OCLC record",
+    "columnInsertIndex": 5,
+    "baseColumnName": "oclc bibligraphic xml",
+    "expression": "grel:trim(value.parseHtml().select('leader')[0].substring(9,35)).substring(17, 18)",
+    "onError": "set-to-blank"
+  }
+]
